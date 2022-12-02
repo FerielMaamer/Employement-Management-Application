@@ -113,6 +113,7 @@ router.put('/emp/employees/:eid', async(req, res)=>{
                 res.status(404).send("No item found")
             }
             res.status(200).send(employee)
+            console.log("added successfully")
             
         }
     } catch (error) {

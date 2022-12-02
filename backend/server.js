@@ -23,10 +23,11 @@ mongoose.connect(DB_URL, {
 app.use("/api/", apiRoutes)
 
 app.get('/', (req, res) => {
-    res.send("<h1>Welcome to the assignment project</h1>");
+    console.log("welcome");
+    res.send("Welcome to the assignment project");
 });
 
-
-app.listen(3001, () => {
-    console.log("Server is listening on port 3001");
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log("Server is listening on port "+ PORT);
 });
