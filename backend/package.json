@@ -115,6 +115,7 @@
     "core-js-compat": "^3.26.1",
     "core-js-pure": "^3.26.1",
     "core-util-is": "^1.0.3",
+    "cors": "^2.8.5",
     "cosmiconfig": "^7.1.0",
     "cross-spawn": "^7.0.3",
     "crypto-random-string": "^2.0.0",

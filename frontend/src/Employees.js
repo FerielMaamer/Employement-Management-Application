@@ -8,7 +8,6 @@ import Update from "./CRUD pages/Update";
 
 export default function Employees() {
   const [data, setData] = React.useState([]);
-  const [updateBtnClicked, setUpdateBtnClicked] = React.useState(false);
 
   React.useEffect(() => {
     const fetchAllEmployees = async () => {
@@ -23,11 +22,6 @@ export default function Employees() {
     fetchAllEmployees();
   }, []);
 
-  const handleUpdateBtn = () => {
-    setUpdateBtnClicked(true);
-    console.log(updateBtnClicked);
-  }
-
   const handleDelete = async (eid) => {
     try {
       await axios.delete(`/api/emp/employees/${eid}`);
@@ -36,16 +30,19 @@ export default function Employees() {
       console.log(err);
     }
   };
-  //const location = useLocation();
-  //console.log(location);
 
   return (
     <div>
       <header >
       <h1>Employees List</h1>
       
-        
-        <Add></Add>
+        <button>
+          <Link
+            to={`/add`}
+            style={{ color: "inherit", textDecoration: "none" }}
+          > 
+            Add
+          </Link> </button>
          <table className="striped bordered hover" >
         <thead>
           <tr>
@@ -63,26 +60,22 @@ export default function Employees() {
                   <td >{info["last_name"]}</td>
                   <td >{info["email"]}</td>
                   <td>
-                    {/*<button>
+                    <button>
                        <Link
                       to={`/update/${info["_id"]}`}
                       style={{ color: "inherit", textDecoration: "none" }}
                     > 
                       Update
-                    </Link> </button>*/}
-                    <button onClick={()=>handleUpdateBtn()}>
-                      
-                      Update</button>
-                      {updateBtnClicked && 
-                      <Update eid={info["_id"]}></Update>}
+                    </Link> </button>
+                    
                     <button onClick={() => handleDelete(info["_id"])}>Delete</button>
-                    {/* <button>
+                    <button>
                       <Link
                       to={`/view/${info["_id"]}`}
                       style={{ color: "inherit", textDecoration: "none" }}
                     >
                       View
-                    </Link></button> */}
+                    </Link></button>
                   </td>
                   </tr>
                 ;

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Update(props) {
+function Update() {
    const [employee, setEmployee] = React.useState({
             first_name:"",
             last_name:"",
@@ -12,16 +12,10 @@ function Update(props) {
         }); 
 
     const [error,setError] = useState(false)
-    //const { createMemoryHistory } = require("history");
-    //const history = createMemoryHistory();
-    //const location = useLocation();
-    //const navigate = useNavigate();
-
-    //const navigate = history;
+    const navigate = useNavigate();
     
-    //const eid = window.location.href;
-    console.log("eid");
-    console.log(props.eid);
+    const location = useLocation();
+    const eid = location.pathname.split("/")[2];
 
     const handleChange = (e) => {
         setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,8 +25,8 @@ function Update(props) {
         e.preventDefault();
 
         try {
-        await axios.put(`api/emp/employees/${props.eid}`, employee);
-       //navigate("/");
+        await axios.put(`https://cryptic-atoll-26939.herokuapp.com/api/emp/employees/${eid}`, employee);
+        navigate("/");
         } catch (err) {
         console.log(err);
         setError(true);
@@ -49,7 +43,6 @@ function Update(props) {
         onChange={handleChange}
       />
       <textarea
-        rows={5}
         type="text"
         placeholder="Last Name"
         name="last_name"
@@ -75,7 +68,7 @@ function Update(props) {
       />$
       <button onClick={handleClick}>Update</button>
       {error && "Something went wrong!"}
-      {/* <Link to="/">See all books</Link> */}
+      <Link to="/">See all employees</Link>
     </div>
   );
 }

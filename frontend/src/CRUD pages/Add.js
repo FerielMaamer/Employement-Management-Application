@@ -12,13 +12,7 @@ function Add() {
         });
 
     const [error,setError] = useState(false)
-
-    //const location = useLocation();
-    //const navigate = useNavigate();
-
-    //const eid = location.pathname.split("/")[2];
-    //const eid = window.location.href.split("/")[2];
-    //console.log(eid);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,7 +23,7 @@ function Add() {
 
         try {
         await axios.post(`api/emp/employees`, employee);
-        //navigate("/");
+        navigate("/");
         } catch (err) {
         console.log(err);
         setError(true);
@@ -72,7 +66,7 @@ function Add() {
       />$
       <button onClick={handleClick}>Add</button>
       {error && "Something went wrong!"}
-      {/* <Link to="/">See all books</Link>  */}
+      <Link to="/">See all employees</Link> 
     </div>
   );
 }

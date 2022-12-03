@@ -122,9 +122,9 @@ router.put('/emp/employees/:eid', async(req, res)=>{
 })
 
 //7-User can delete employee by employee id
-router.delete('/emp/employees', async(req, res)=>{
+router.delete('/emp/employees/:eid', async(req, res)=>{
     try {
-        employeeId = req.query.eid
+        employeeId = req.params.eid
         console.log(employeeId)
         const employee = await employeeModel.findByIdAndDelete(employeeId)
         //console.log(employee)

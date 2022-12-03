@@ -2,11 +2,13 @@ const express = require('express');
 const apiRoutes = require('./routes/apiRoutes');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser")
+var cors = require('cors')
 
 const DB_URL = "mongodb+srv://fpanda:fpanda@cluster0.gzuk5c6.mongodb.net/lab?retryWrites=true&w=majority"
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(cors())
 
 mongoose.Promise = global.Promise;
 
