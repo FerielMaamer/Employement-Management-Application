@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function View() {
+function View(props) {
    const [data, setData] = React.useState([]);
 
     const [error,setError] = useState(false)
@@ -30,6 +30,7 @@ function View() {
     
   return (
     <div className="form">
+      <button onClick={props.handleLogout}>Logout</button>
         View page
      
       <div>
@@ -41,7 +42,7 @@ function View() {
       
       
       {error && "Something went wrong!"}
-      <Link to="/">See all employees</Link>
+      <Link to="/employees">See all employees</Link>
     </div>
   );
 }

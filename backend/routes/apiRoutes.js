@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
+const bodyParser = require('body-parser');
 const userModel = require('../models/userModel');
 const employeeModel = require('../models/employeeModel');
 //const validate = require('../models/userModel');
+const jwt = require('jsonwebtoken')
 
 
 //1-Allow user to create new account
@@ -19,6 +21,7 @@ router.post('/user/signup', async(req, res)=>{
             console.log(req.body.username)
             res.status(201).send(newUser)
         }
+
     } catch (error) {
         res.status(500).send(error)
     }
@@ -28,6 +31,7 @@ router.post('/user/signup', async(req, res)=>{
 //User can login using username/email and password
 router.post('/user/login', async(req, res)=>{
     try {
+        
         if(!req.body) {
         return res.status(400).send({
             message: `user content cannot be empty`
@@ -56,14 +60,16 @@ router.post('/user/login', async(req, res)=>{
                         }   
                     }})
             })        
-        }        
+        } 
+
     } catch (error) {
         res.status(500).send(error)
     }
 })
 
+
 //3-User can get all employee list
-router.get('/emp/employees', async(req, res)=>{
+router.get('/emp/employees',  async(req, res)=>{
     try {
         const employees = await employeeModel.find()
         res.status(200).send(employees)        
@@ -73,7 +79,7 @@ router.get('/emp/employees', async(req, res)=>{
 })
 
 //4-User can create new employee
-router.post('/emp/employees', async(req, res)=>{
+router.post('/emp/employees',  async(req, res)=>{
     try {
         if(!req.body) {
         return res.status(400).send({
@@ -90,7 +96,7 @@ router.post('/emp/employees', async(req, res)=>{
 })
 
 //5-User can get employee details by employee id
-router.get('/emp/employees/:eid', async(req, res)=>{
+router.get('/emp/employees/:eid',  async(req, res)=>{
     try {
         const employee = await employeeModel.findById(req.params.eid)
         res.status(200).send(employee)
@@ -100,7 +106,7 @@ router.get('/emp/employees/:eid', async(req, res)=>{
 })
 
 //6-User can update employee details
-router.put('/emp/employees/:eid', async(req, res)=>{
+router.put('/emp/employees/:eid',  async(req, res)=>{
     try {
         if(!req.body) {
             return res.status(400).send({
@@ -122,7 +128,7 @@ router.put('/emp/employees/:eid', async(req, res)=>{
 })
 
 //7-User can delete employee by employee id
-router.delete('/emp/employees/:eid', async(req, res)=>{
+router.delete('/emp/employees/:eid',  async(req, res)=>{
     try {
         employeeId = req.params.eid
         console.log(employeeId)

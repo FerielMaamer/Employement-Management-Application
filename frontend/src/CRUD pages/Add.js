@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Add() {
+function Add(props) {
   const [employee, setEmployee] = React.useState({
             first_name:"",
             last_name:"",
@@ -31,7 +31,7 @@ function Add() {
     };
   return (
      <div className="form">
-        add page
+      <button onClick={props.handleLogout}>Logout</button>
       <h1>Add a New Employee</h1>
       <input
         type="text"
@@ -66,7 +66,7 @@ function Add() {
       />$
       <button onClick={handleClick}>Add</button>
       {error && "Something went wrong!"}
-      <Link to="/">See all employees</Link> 
+      <Link to="/employees">See all employees</Link> 
     </div>
   );
 }

@@ -1,18 +1,16 @@
 import {useRef, useState, useEffect} from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, redirect } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-    /* const userRef = useRef();
-    const errRef = useRef(); */
-
+    
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({
         username:"",
         password:""
     });
+    const [message, setMessage]= useState("");
     const [error,setError] = useState(false)
-    /* const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(''); */
     const navigate = useNavigate();
     useEffect(()=>{
         
@@ -22,8 +20,14 @@ function Login() {
         e.preventDefault();
 
         try {
-        await axios.put(`https://cryptic-atoll-26939.herokuapp.com/api/user/login`, user);
-        navigate("/");
+        const res = await axios.post(`https://cryptic-atoll-26939.herokuapp.com/api/user/login`, user)
+        console.log(res);
+        setMessage(res.data["message"]);
+        if (res.data.status){
+            localStorage.setItem("user", JSON.stringify(user));
+            setLoggedIn(true);
+            navigate("/employees")
+        }
         } catch (err) {
         console.log(err);
         setError(true);
@@ -34,8 +38,12 @@ function Login() {
         setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
+
+
+
   return (
     <div>
+        {isLoggedIn  }
         <form onSubmit={handleClick}>
             <input
                 type="text"
@@ -43,7 +51,7 @@ function Login() {
                 name="username"
                 onChange={handleChange}
             />
-            <textarea
+            <input
                 type="password"
                 placeholder="Password"
                 name="password"
@@ -51,8 +59,8 @@ function Login() {
             />
             <button type="submit">Login</button>            
         </form>
-        {error && "Something went wrong!"}
-        <Link to="/">See all employees</Link>
+        <p>{message}</p>
+        <Link to="/register">Don't have an account?</Link>
     </div>
   );
 }

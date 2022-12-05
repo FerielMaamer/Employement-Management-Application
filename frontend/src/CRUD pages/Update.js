@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Update() {
+function Update(props) {
    const [employee, setEmployee] = React.useState({
             first_name:"",
             last_name:"",
@@ -34,6 +34,7 @@ function Update() {
     };
   return (
     <div className="form">
+      <button onClick={props.handleLogout}>Logout</button>
         update page
       <h1>Update the Employee Details</h1>
       <input
@@ -68,7 +69,7 @@ function Update() {
       />$
       <button onClick={handleClick}>Update</button>
       {error && "Something went wrong!"}
-      <Link to="/">See all employees</Link>
+      <Link to="/employees">See all employees</Link>
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import axios from 'axios';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Add from "./CRUD pages/Add";
 import Update from "./CRUD pages/Update";
 
 
-export default function Employees() {
+export default function Employees(props) {
   const [data, setData] = React.useState([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const fetchAllEmployees = async () => {
@@ -22,6 +23,8 @@ export default function Employees() {
     fetchAllEmployees();
   }, []);
 
+  
+
   const handleDelete = async (eid) => {
     try {
       await axios.delete(`/api/emp/employees/${eid}`);
@@ -30,9 +33,17 @@ export default function Employees() {
       console.log(err);
     }
   };
+  
+
+  /* const handleLogout=()=>{
+    localStorage.clear();
+    window.location.reload();
+    window.location.replace('/');
+  } */
 
   return (
     <div>
+      <button onClick={props.handleLogout}>Logout</button>
       <header >
       <h1>Employees List</h1>
       
