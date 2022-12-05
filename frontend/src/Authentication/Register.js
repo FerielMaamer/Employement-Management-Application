@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate, redirect } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Register() {
   const [user, setUser] = useState({
@@ -37,31 +40,29 @@ function Register() {
 
   return (
     <div>
-        <form onSubmit={handleClick}>
-              <h1>Enter your details Details</h1>
-              <input
-                type="text"
-                placeholder="UserName"
-                name="username"
-                onChange={handleChange}
-            />
-            <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={handleChange}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={handleChange}
-            />
-            <button type="submit">Login</button>            
-        </form>
-        <p>{message}</p>
-        {error && "Something went wrong!"}
-        <Link to="/login">Already have an account?</Link>
+        <h3 className="px-5 mx-5 mt-5">Sign up Page</h3>
+        <Form onSubmit={handleClick} className="px-5 mx-5 mt-5">
+            <Form.Group className="mb-3" controlId="formUsername">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Enter Username" 
+                name="username" onChange={handleChange}/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEmail">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control type="text" placeholder="Enter Email Address" 
+                name="email" onChange={handleChange}/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Enter password" 
+                name="password" onChange={handleChange}/>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Sign Up
+            </Button>
+            <p>{message}</p>
+            <Link to="/">Already have an account?</Link>
+        </Form>         
     </div>
   );
 }

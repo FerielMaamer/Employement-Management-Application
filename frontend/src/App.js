@@ -7,6 +7,7 @@ import Update from './CRUD pages/Update';
 import View from './CRUD pages/View';
 import Login from './Authentication/Login';
 import Register from './Authentication/Register';
+import NavBar from './NavBar';
 
 function App() {
 
@@ -15,19 +16,11 @@ function App() {
     window.location.reload();
     window.location.replace('/');
   } 
-  /* useEffect(()=>{
-    setLocalSt( localStorage.getItem("user"));
-    console.log(localSt);
-  },[localStorage, localSt]) */
-   /* window.addEventListener("storage", function () {
-    setLocalSt( localStorage.getItem("user"));
-    console.log(localSt);
-}, false);  */
-  
+
   return (
     <div>
-          
-     <BrowserRouter>
+    <NavBar></NavBar>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} exact/>
         <Route path="/register" element={<Register />} exact/>

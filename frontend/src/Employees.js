@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Add from "./CRUD pages/Add";
 import Update from "./CRUD pages/Update";
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 
 
 export default function Employees(props) {
@@ -35,26 +37,21 @@ export default function Employees(props) {
   };
   
 
-  /* const handleLogout=()=>{
-    localStorage.clear();
-    window.location.reload();
-    window.location.replace('/');
-  } */
-
   return (
-    <div>
-      <button onClick={props.handleLogout}>Logout</button>
-      <header >
-      <h1>Employees List</h1>
+    <div className="px-3 mx-3">
+      <Button className="float-right" onClick={props.handleLogout} variant="light">Logout</Button>
       
-        <button>
-          <Link
+      <header >
+      <h1 className="py-4 mb-4">Employees List</h1>
+      <Button className="mb-4" variant="outline-dark">
+        <Link
             to={`/add`}
             style={{ color: "inherit", textDecoration: "none" }}
           > 
-            Add
-          </Link> </button>
-         <table className="striped bordered hover" >
+            Add Employee
+          </Link></Button>
+        
+        <Table striped bordered hover>
         <thead>
           <tr>
             <th>Employee First Name</th>
@@ -71,29 +68,29 @@ export default function Employees(props) {
                   <td >{info["last_name"]}</td>
                   <td >{info["email"]}</td>
                   <td>
-                    <button>
-                       <Link
+                    <Button variant="outline-dark"><Link
                       to={`/update/${info["_id"]}`}
                       style={{ color: "inherit", textDecoration: "none" }}
                     > 
-                      Update
-                    </Link> </button>
+                      Update</Link>
+                      </Button>{' '}
+                    <Button variant="outline-dark" 
+                    onClick={() => handleDelete(info["_id"])}>Delete</Button>{' '}
                     
-                    <button onClick={() => handleDelete(info["_id"])}>Delete</button>
-                    <button>
-                      <Link
+                    <Button variant="outline-dark"><Link
                       to={`/view/${info["_id"]}`}
                       style={{ color: "inherit", textDecoration: "none" }}
                     >
                       View
-                    </Link></button>
+                    </Link></Button>
+                    
                   </td>
                   </tr>
                 ;
               })
             }
             </tbody>
-      </table>
+      </Table>
       </header>
     </div>
   );

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 function View(props) {
    const [data, setData] = React.useState([]);
@@ -29,18 +31,20 @@ function View(props) {
   },[data]);
     
   return (
-    <div className="form">
-      <button onClick={props.handleLogout}>Logout</button>
-        View page
-     
-      <div>
-        <p><b>First Name: </b>{data["first_name"]}</p>
-        <p><b>Last Name: </b>{data["last_name"]}</p>
-        <p><b>Email Address: </b>{data["email"]}</p>
-        <p><b>Salary: </b>{data["salary"]}</p>
-      </div>
-      
-      
+    <div>
+      <Button className="mb-5" onClick={props.handleLogout} variant="light">Logout</Button>
+      <Card style={{ width: '18rem' }} className="text-center">
+      <Card.Body>
+        <Card.Title className="mb-4 center" >Employee Details</Card.Title>
+        <Card.Text>
+            <p><b>First Name: </b>{data["first_name"]}</p>
+            <p><b>Last Name: </b>{data["last_name"]}</p>
+            <p><b>Email Address: </b>{data["email"]}</p>
+            <p><b>Gender: </b>{data["gender"]}</p>
+            <p><b>Salary: </b>{data["salary"]}</p>
+        </Card.Text>
+      </Card.Body>
+    </Card>
       {error && "Something went wrong!"}
       <Link to="/employees">See all employees</Link>
     </div>
